@@ -1,0 +1,89 @@
+1.
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Age INT CHECK (Age BETWEEN 18 AND 25),
+    Grade DECIMAL(3,1) CHECK (Grade BETWEEN 0.0 AND 10.0)
+);
+INSERT INTO Students (StudentID, Name, Age, Grade) VALUES (3, 'Garima', 19,9.2);
+INSERT INTO Students (StudentID, Name, Age, Grade) VALUES (4, 'Veer', 22,9.5);
+INSERT INTO Students (StudentID, Name, Age, Grade) VALUES (5, 'Mihir', 15,8.9);
+
+
+
+
+2.
+CREATE TABLE Courses (
+  CourseID INT PRIMARY KEY,
+  CourseName VARCHAR(100) NOT NULL,
+  Credits INT NOT NULL
+);
+INSERT INTO Courses (CourseName, Credits)
+VALUES ('DBMS', 6);
+
+
+
+
+3.
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    ProductID INT,
+    OrderQuantity INT NOT NULL,
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)  
+);
+
+INSERT INTO Products (ProductID, ProductName)
+VALUES (1, 'Mobile');
+INSERT INTO Orders (OrderID, ProductID, OrderQuantity)
+VALUES (1, 1, 2);
+INSERT INTO Orders (OrderID, ProductID, OrderQuantity)
+VALUES (1, 11, 2);
+
+
+
+
+4.
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100),
+    UNIQUE (Email)
+);
+INSERT INTO Employees (EmployeeID, Name, Email)
+VALUES (1, 'Heena', 'heena@example.com');
+INSERT INTO Employees (EmployeeID, Name, Email)
+VALUES (2, 'Heena Mathew','heena@example.com');
+INSERT INTO Employees (EmployeeID, Name)
+VALUES (3, 'Sam');
+
+
+
+
+5.
+CREATE TABLE Accounts (
+    AccountID INT PRIMARY KEY,
+    AccountName VARCHAR(10) NOT NULL,
+    Balance DECIMAL(10, 2) CHECK (Balance >= 0)
+);
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY,
+    AccountID INT,
+    TransactionAmount DECIMAL NOT NULL CHECK (TransactionAmount != 0),
+    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
+);
+INSERT INTO Transactions (TransactionID, AccountID, TransactionAmount)
+VALUES (1, 999, 100.00);
+INSERT INTO Accounts (AccountID, AccountName, Balance)
+VALUES (1, 'Heena123', 5000.00);
+
+INSERT INTO Accounts (AccountID, AccountName, Balance)
+VALUES (2, 'Heena1234', 3000.00);
+INSERT INTO Transactions (TransactionID, AccountID, TransactionAmount)
+VALUES (1, 1, 100.00);
+INSERT INTO Transactions (TransactionID, AccountID, TransactionAmount)
+VALUES (2, 2, 200.00);
